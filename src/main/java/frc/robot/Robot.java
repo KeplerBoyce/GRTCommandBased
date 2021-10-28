@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
         robotContainer = new RobotContainer();
         
         textCommandGroup = robotContainer.getTextCommandGroup();
-        CommandScheduler.getInstance().schedule(textCommandGroup);
+        textCommandGroup.schedule();
     }
 
     /**

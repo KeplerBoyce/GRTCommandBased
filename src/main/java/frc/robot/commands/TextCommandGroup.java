@@ -60,7 +60,7 @@ public class TextCommandGroup extends SequentialCommandGroup {
             });
             //close buffered reader at the end
             br.close();
-        //exceptions
+
         } catch(FileNotFoundException e) {
             System.out.println("File not found");
         } catch(IOException e) {
