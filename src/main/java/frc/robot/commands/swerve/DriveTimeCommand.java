@@ -6,24 +6,29 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class DriveTimeCommand extends CommandBase {
     
     private final SwerveSubsystem swerveSubsystem;
+    private String direction;
+    private float seconds;
 
-    //direction: 1=forwards, -1=backwards
+    //direction is either "forward" or "backward"
     public DriveTimeCommand(SwerveSubsystem swerveSubsystem, String direction, float seconds) {
-        this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
-        //for now, just print what this command would do
-        System.out.println("Driving " + seconds + " seconds " + direction);
+        this.swerveSubsystem = swerveSubsystem;
+        this.direction = direction;
+        this.seconds = seconds;
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         //this would drive motors according to direction and seconds
         swerveSubsystem.setDrivePowers(/* there would be params here */);
+        
+        //for now, just print what this command would do
+        System.out.println("Driving " + this.seconds + " seconds " + this.direction);
     }
     
     @Override
     public boolean isFinished() {
-        //check if swerve subsystem is done with this command
-        return swerveSubsystem.getFinished();
+        //for now, just return true
+        return true;
     }
 }

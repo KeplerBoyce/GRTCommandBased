@@ -4,10 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.TextFileCommands;
+import frc.robot.commands.TextCommandGroup;
+import frc.robot.subsystems.GuzzlerSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 /**
@@ -18,35 +17,15 @@ import frc.robot.subsystems.SwerveSubsystem;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    // The robot's subsystems and commands are defined here
+    private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    private final GuzzlerSubsystem guzzlerSubsystem = new GuzzlerSubsystem();
 
-  private final TextFileCommands textCommand = new TextFileCommands(swerveSubsystem);
+    private final TextCommandGroup textCommandGroup = new TextCommandGroup(swerveSubsystem, guzzlerSubsystem);
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
+    public RobotContainer() {}
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-  }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getTextCommand() {
-    // An ExampleCommand will run in autonomous
-    return textCommand;
-  }
+    public Command getTextCommandGroup() {
+        return textCommandGroup;
+    }
 }

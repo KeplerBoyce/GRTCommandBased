@@ -1,4 +1,6 @@
 turn right 45
 drive forward time 2
+intake
 turn left 65.5
 drive backward distance 3.2
+intake

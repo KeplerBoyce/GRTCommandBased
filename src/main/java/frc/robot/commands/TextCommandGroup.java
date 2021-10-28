@@ -11,22 +11,20 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.guzzler.GuzzlerIntakeCommand;
 import frc.robot.commands.swerve.DriveDistanceCommand;
 import frc.robot.commands.swerve.DriveTimeCommand;
 import frc.robot.commands.swerve.TurnCommand;
+import frc.robot.subsystems.GuzzlerSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class TextFileCommands extends SequentialCommandGroup {
-    /**
-     * Creates a new TextFileCommands.
-     *
-     * @param subsystem The subsystem used by this command.
-     */
-    public TextFileCommands(SwerveSubsystem swerveSubsystem) {
+public class TextCommandGroup extends SequentialCommandGroup {
 
+    public TextCommandGroup(SwerveSubsystem swerveSubsystem, GuzzlerSubsystem guzzlerSubsystem) {
         //handle possible file not found and io exceptions
         try {
             //reading lines from text file
+            //path is the relative path to text file from GRTCommandBased folder
             BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\frc\\robot\\commands\\testcommands.txt"));
             Stream<String> lines = br.lines();
 
@@ -36,7 +34,8 @@ public class TextFileCommands extends SequentialCommandGroup {
                 String[] parts = line.split(" ");
                 //for turn commands: parts = ["turn", direction, degrees]
                 //for drive commands: parts = ["drive", direction, mode(distance or time), meters/seconds]
-                
+                //for intake commands: parts = ["intake"]
+
                 //check if this line is a turn or a drive command
                 switch (parts[0]) {
                     case "turn":
@@ -52,6 +51,10 @@ public class TextFileCommands extends SequentialCommandGroup {
                             //add drive time command (params explained above)
                             addCommands(new DriveTimeCommand(swerveSubsystem, parts[1], Float.parseFloat(parts[3])));
                         }
+                        break;
+                    case "intake":
+                        //add guzzler intake command
+                        addCommands(new GuzzlerIntakeCommand(guzzlerSubsystem));
                         break;
                 }
             });

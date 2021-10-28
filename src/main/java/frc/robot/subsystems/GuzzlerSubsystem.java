@@ -7,8 +7,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SwerveSubsystem extends SubsystemBase {
-    public SwerveSubsystem() {
+public class GuzzlerSubsystem extends SubsystemBase {
+
+    private int numBlocks = 0;//how many blocks have been taken in
+
+    public GuzzlerSubsystem() {
         CommandScheduler.getInstance().registerSubsystem(this);
     }
 
@@ -22,8 +25,14 @@ public class SwerveSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run during simulation
     }
 
-    //there would be params for this method (e.g. the direction and RPM to set each motor to)
-    public void setDrivePowers() {
-        //set motor RPM and such here
+    //do whatever the process is for the guzzler mech taking a block in
+    public void intakeBlock() {
+        //for now, just pretend that the mech takes in the block and increase numBlocks
+        numBlocks++;
+    }
+
+    //get how many blocks are currently stored
+    public int getNumBlocks() {
+        return numBlocks;
     }
 }
