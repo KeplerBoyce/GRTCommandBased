@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class GuzzlerSubsystem extends SubsystemBase {
 
-    private int numBlocks = 0;//how many blocks have been taken in
+    private int numBlocks = 0;//how many blocks are in storage
 
     public GuzzlerSubsystem() {
         CommandScheduler.getInstance().registerSubsystem(this);
@@ -31,7 +31,7 @@ public class GuzzlerSubsystem extends SubsystemBase {
         numBlocks++;
     }
 
-    //get how many blocks are currently stored
+    //get how many blocks are currently in storage
     public int getNumBlocks() {
         return numBlocks;
     }

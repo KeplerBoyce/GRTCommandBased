@@ -25,12 +25,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-        // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
         
+        //schedule command group (commands read from text file)
         textCommandGroup = robotContainer.getTextCommandGroup();
-        textCommandGroup.schedule();
+        if (textCommandGroup != null) textCommandGroup.schedule();
     }
 
     /**
