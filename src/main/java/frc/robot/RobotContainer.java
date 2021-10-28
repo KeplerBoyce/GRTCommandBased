@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.swerve.TextFileCommands;
+import frc.robot.commands.TextFileCommands;
 import frc.robot.subsystems.SwerveSubsystem;
 
 /**
@@ -21,7 +21,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-  private final TextFileCommands autoCommand = new TextFileCommands(swerveSubsystem);
+  private final TextFileCommands textCommand = new TextFileCommands(swerveSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -45,8 +45,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getTextCommand() {
     // An ExampleCommand will run in autonomous
-    return autoCommand;
+    return textCommand;
   }
 }

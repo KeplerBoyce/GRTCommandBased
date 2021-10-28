@@ -10,6 +10,7 @@ public class DriveDistanceCommand extends CommandBase {
     public DriveDistanceCommand(SwerveSubsystem swerveSubsystem, String direction, float meters) {
         this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
+        //for now, just print what this command would do
         System.out.println("Driving " + meters + " meters " + direction);
     }
 
@@ -21,6 +22,7 @@ public class DriveDistanceCommand extends CommandBase {
     
     @Override
     public boolean isFinished() {
-        return true;
+        //check if swerve subsystem is done with this command
+        return swerveSubsystem.getFinished();
     }
 }

@@ -10,6 +10,7 @@ public class TurnCommand extends CommandBase {
     public TurnCommand(SwerveSubsystem swerveSubsystem, String direction, float degrees) {
         this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
+        //for now, just print what this command would do
         System.out.println("Turning " + degrees + " degrees " + direction);
     }
 
@@ -21,6 +22,7 @@ public class TurnCommand extends CommandBase {
     
     @Override
     public boolean isFinished() {
-        return true;
+        //check if swerve subsystem is done with this command
+        return swerveSubsystem.getFinished();
     }
 }

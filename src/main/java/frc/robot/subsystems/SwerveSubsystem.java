@@ -22,7 +22,15 @@ public class SwerveSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run during simulation
     }
 
-    public void setDrivePowers(/* there would be params here (e.g. direction + RPM of each motor) */) {
-        
+    //there would be params in this method (e.g. the direction and RPM to set each motor to)
+    public void setDrivePowers() {}
+
+    //return whether or not the current command is finished
+    public boolean getFinished() {
+        //this is where it would check if the robot has turned the desired amount,
+        //moved the desired distance, etc.
+
+        //for the sake of testing, just returns true (as if every command finished instantly)
+        return true;
     }
 }
