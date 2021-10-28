@@ -1,4 +1,0 @@
-right 45
-forward 2s
-left 120
-backward 4m

@@ -4,10 +4,12 @@
 
 package frc.robot;
 
+import java.io.FileNotFoundException;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.TextFileCommands;
+import frc.robot.commands.swerve.TextFileCommands;
 import frc.robot.subsystems.SwerveSubsystem;
 
 /**
