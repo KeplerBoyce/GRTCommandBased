@@ -5,6 +5,7 @@
 package frc.robot.commands.swerve;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,9 +25,10 @@ public class TextFileCommands extends SequentialCommandGroup {
 
         try {
             //reading lines from text file
-            BufferedReader br = new BufferedReader(new FileReader("testcommands.txt"));
+            File f = new File("src\\main\\java\\frc\\robot\\commands\\swerve\\testcommands.txt");
+            System.out.println(f.getAbsolutePath());
+            BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\frc\\robot\\commands\\swerve\\testcommands.txt"));
             Stream<String> lines = br.lines();
-            br.close();
 
             //go through lines one by one and add corresponding commands
             lines.forEach(line -> {
@@ -37,7 +39,7 @@ public class TextFileCommands extends SequentialCommandGroup {
                 switch (parts[0]) {
                     case "turn":
                         //add command to turn as specified by this line
-                        addCommands(new TurnCommand(swerveSubsystem, parts[1], Float.parseFloat(parts[1])));
+                        addCommands(new TurnCommand(swerveSubsystem, parts[1], Float.parseFloat(parts[2])));
                         break;
                     case "drive":
                         //add command to drive as specified by this line
@@ -49,6 +51,7 @@ public class TextFileCommands extends SequentialCommandGroup {
                         break;
                 }
             });
+            br.close();
         } catch(FileNotFoundException e) {
             System.out.println("File not found");
         } catch(IOException e) {
