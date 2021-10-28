@@ -38,6 +38,7 @@ public class DriveTankCommand extends CommandBase {
   @Override
   public void initialize() {
     tankSubsystem.setDrivePowers(yScale, angularScale, squareInput);
+    System.out.println("driving " + yScale + " " + angularScale);
   }
 
   @Override

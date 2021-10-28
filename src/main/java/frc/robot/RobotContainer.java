@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.tank.DriveTankCommand;
 import frc.robot.commands.elevator.ElevatorUpCommand;
+import frc.robot.commands.TextCommandGroup;
 import frc.robot.commands.elevator.ElevatorDownCommand;
 import frc.robot.commands.elevator.ElevatorStopCommand;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
@@ -42,7 +43,7 @@ public class RobotContainer {
   private XboxController controlXbox = new XboxController(0);
 
   // Commands
-  private final DriveTankCommand tankCommand;
+  private final TextCommandGroup textCommandGroup;
 
   // Helper field variables
   Properties config;
@@ -75,7 +76,7 @@ public class RobotContainer {
     Integer.parseInt(config.getProperty("elevator_follower")));
 
     // Instantiate commands
-    tankCommand = new DriveTankCommand(tankSubsystem, 0, 0);
+    textCommandGroup = new TextCommandGroup(tankSubsystem);
     tankSubsystem.setDefaultCommand(new DriveTankCommand(tankSubsystem, controlXbox.getY(),controlXbox.getRawAxis(1)));
     elevatorSubsystem.setDefaultCommand(new ElevatorStopCommand(elevatorSubsystem));
 
@@ -116,6 +117,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return tankCommand;
+    return textCommandGroup;
   }
 }
