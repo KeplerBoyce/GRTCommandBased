@@ -77,8 +77,6 @@ public class RobotContainer {
 
     // Instantiate commands
     textCommandGroup = new TextCommandGroup(tankSubsystem);
-    tankSubsystem.setDefaultCommand(new DriveTankCommand(tankSubsystem, controlXbox.getY(),controlXbox.getRawAxis(1)));
-    elevatorSubsystem.setDefaultCommand(new ElevatorStopCommand(elevatorSubsystem));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -101,10 +99,10 @@ public class RobotContainer {
      */
 
     // when A is pressed, move elevator Up
-    new JoystickButton(controlXbox, 1).whenPressed(new ElevatorUpCommand(elevatorSubsystem));
+    //new JoystickButton(controlXbox, 1).whenPressed(new ElevatorUpCommand(elevatorSubsystem));
 
     // when B is pressed, move elevator down
-    new JoystickButton(controlXbox, 2).whenPressed(new ElevatorDownCommand(elevatorSubsystem));
+    //new JoystickButton(controlXbox, 2).whenPressed(new ElevatorDownCommand(elevatorSubsystem));
 
 
 

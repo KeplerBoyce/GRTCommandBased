@@ -11,12 +11,14 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.guzzler.GuzzlerIntakeCommand;
 import frc.robot.commands.tank.DriveTankCommand;
+import frc.robot.subsystems.guzzler.GuzzlerSubsystem;
 import frc.robot.subsystems.tank.TankSubsystem;
 
 public class TextCommandGroup extends SequentialCommandGroup {
 
-    public TextCommandGroup(TankSubsystem tank) {
+    public TextCommandGroup(TankSubsystem tank, GuzzlerSubsystem guzzler) {
         //handle possible file not found and io exceptions
         try {
             //reading lines from text file
@@ -43,6 +45,9 @@ public class TextCommandGroup extends SequentialCommandGroup {
                         //check if driving by distance or by time
                         if (parts[1].equals("forward")) addCommands(new DriveTankCommand(tank, Float.parseFloat(parts[2]), 0));
                         else if (parts[1].equals("backward")) addCommands(new DriveTankCommand(tank, -Float.parseFloat(parts[2]), 0));
+                        break;
+                    case "intake":
+                        addCommands(new GuzzlerIntakeCommand(guzzler))
                         break;
                 }
             });
