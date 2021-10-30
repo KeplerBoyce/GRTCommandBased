@@ -1,6 +1,9 @@
 turn right 45
-drive forward 1.92 seconds
+drive forward 1 s
+drive backward 0.5 s
+drive forward 1.92 s
 intake
 turn left 65
-drive backward 3.2 meters
+drive backward 3.2 m
+drive forward 1 s
 intake

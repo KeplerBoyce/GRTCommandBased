@@ -33,7 +33,7 @@ public class TextCommandGroup extends SequentialCommandGroup {
                 //parts[0] is the type of command
                 //parts[1] is the direction (if command has a direction)
                 //parts[2] is the value (degrees, seconds, or meters, if command has a value)
-                //parts[3] is either "seconds" or "meters"; only for drive commands
+                //parts[3] is either "s" or "m"; only for drive commands
 
                 //degrees, seconds, or meters, depending on drive mode
                 float value = 0;
@@ -51,8 +51,8 @@ public class TextCommandGroup extends SequentialCommandGroup {
                         if (parts[1].equals("forward")) value = Float.parseFloat(parts[2]);
                         else if (parts[1].equals("backward")) value = -Float.parseFloat(parts[2]);
                         //add drive command (either time mode or distance mode)
-                        if (parts[3].equals("seconds")) addCommands(new DriveTankCommand(tank, 1, value));
-                        else if (parts[3].equals("meters")) addCommands(new DriveTankCommand(tank, 2, value));
+                        if (parts[3].equals("s")) addCommands(new DriveTankCommand(tank, 1, value));
+                        else if (parts[3].equals("m")) addCommands(new DriveTankCommand(tank, 2, value));
                         break;
                     case "intake":
                         //add guzzler intake command

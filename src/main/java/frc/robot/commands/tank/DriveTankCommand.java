@@ -18,8 +18,9 @@ public class DriveTankCommand extends CommandBase {
     private int leftEncTargetDelta;
     private int rightEncTargetDelta;
 
+    private boolean usesSeconds;
     private double seconds;
-    private double startTime;
+    private long startTime;
 
     //for mode, 0=turning, 1=driving seconds, 2=driving meters
     //value for driving: positive=forward and negative=backward
@@ -30,7 +31,8 @@ public class DriveTankCommand extends CommandBase {
         this.tankSubsystem = tankSubsystem;
         addRequirements(tankSubsystem);
 
-        //if seconds is 0, it means this command is not driving based on time
+        //default values
+        this.usesSeconds = false;
         this.seconds = 0;
         this.startTime = 0;
         
@@ -43,6 +45,7 @@ public class DriveTankCommand extends CommandBase {
                 break;
             case 1:
                 //this case is when it is driving based on time, so set seconds value
+                this.usesSeconds = true;;
                 this.seconds = value;
                 this.leftEncTargetDelta = (int) Math.round(-value/Constants.ENCODER_TICKS_TO_METERS);
                 this.rightEncTargetDelta = (int) Math.round(value/Constants.ENCODER_TICKS_TO_METERS);
@@ -67,7 +70,7 @@ public class DriveTankCommand extends CommandBase {
         else tankSubsystem.setDrivePowers(0, -0.5, true);
 
         //set start time for timed commands
-        if (this.seconds == 0) this.startTime = System.currentTimeMillis();
+        if (this.usesSeconds) this.startTime = System.currentTimeMillis();
 
         //print message to check that it is doing stuff
         System.out.println("left encoder target = " + leftEncTargetDelta
@@ -76,18 +79,26 @@ public class DriveTankCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
+
         //for commands that don't use timer
-        if (this.seconds == 0) {
-            //i.e. if the distance that the encoders have moved is equal or
+        if (this.usesSeconds) {
+            //for commands that are timed (e.g. drive forward 1.92 seconds)
+            if (System.currentTimeMillis() >= this.startTime + 1000*Math.abs(this.seconds)) return true;
+            else return false;
+        } else {
+            //if the distance that the encoders have moved is equal or
             //further than the target, it is done doing the command
-            //absolute values simplify dealing with negative numbers
+            //(absolute values simplify dealing with negative numbers)
+
+            //right now this part doesn't work because tankSubsystem get enc delta methods
+            //are always returning 0
+            //for the sake of testing, just returns true (actual code commented out just below)
+            return true;
+            /*
             if (Math.abs(tankSubsystem.getLeftEncDelta()) >= Math.abs(leftEncTargetDelta) &&
                 Math.abs(tankSubsystem.getRightEncDelta()) >= Math.abs(rightEncTargetDelta)) return true;
             else return false;
-        //for commands that are timed (e.g. drive forward 1.92 seconds)
-        } else {
-            if (System.currentTimeMillis() >= this.startTime + 1000*this.seconds) return true;
-            else return false;
+            */
         }
     }
 
