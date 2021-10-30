@@ -70,11 +70,14 @@ public class DriveTankCommand extends CommandBase {
         else tankSubsystem.setDrivePowers(0, -0.5, true);
 
         //set start time for timed commands
-        if (this.usesSeconds) this.startTime = System.currentTimeMillis();
-
-        //print message to check that it is doing stuff
-        System.out.println("left encoder target = " + leftEncTargetDelta
-            + "; right encoder target = " + rightEncTargetDelta);
+        if (this.usesSeconds) {
+            this.startTime = System.currentTimeMillis();
+            System.out.println("driving for " + Math.abs(this.seconds) + " seconds");
+        } else {
+            //if it is turning/driving a specific angle or distance, print the encoder target deltas
+            System.out.println("left encoder target = " + leftEncTargetDelta
+                + "; right encoder target = " + rightEncTargetDelta);
+        }
     }
 
     @Override
