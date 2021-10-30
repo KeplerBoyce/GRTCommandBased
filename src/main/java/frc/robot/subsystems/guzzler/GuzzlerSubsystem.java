@@ -25,9 +25,8 @@ public class GuzzlerSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run during simulation
     }
 
-    //do whatever the process is for the guzzler mech taking a block in
+    //take block in
     public void intakeBlock() {
-        //for now, just pretend that the mech takes in the block and increase numBlocks
         numBlocks++;
     }
 

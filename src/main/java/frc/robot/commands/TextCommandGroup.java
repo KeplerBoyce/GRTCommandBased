@@ -26,28 +26,37 @@ public class TextCommandGroup extends SequentialCommandGroup {
             BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\frc\\robot\\commands\\testcommands.txt"));
             Stream<String> lines = br.lines();
 
-            //go through lines one by one and add commands accordingly
+            //go through line by line and add commands accordingly
             lines.forEach(line -> {
-                //split lines into parts (separated in text file by spaces)
+                //split line into parts (separated in text file by spaces)
                 String[] parts = line.split(" ");
-                //for turn commands: parts = ["turn", direction(left/right), degrees]
-                //for drive commands: parts = ["drive", direction(forward/backward), meters/seconds]
-                //for intake commands: parts = ["intake"]
+                //parts[0] is the type of command
+                //parts[1] is the direction (if command has a direction)
+                //parts[2] is the value (degrees, seconds, or meters, if command has a value)
+                //parts[3] is either "seconds" or "meters"; only for drive commands
 
-                //check if this line is a turn or a drive command
+                //degrees, seconds, or meters, depending on drive mode
+                float value = 0;
+                //check what kind of command this line says to add
                 switch (parts[0]) {
                     case "turn":
+                        //set degrees positive or negative according to direction
+                        if (parts[1].equals("right")) value = Float.parseFloat(parts[2]);
+                        else if (parts[1].equals("left")) value = -Float.parseFloat(parts[2]);
                         //add turn command
-                        if (parts[1].equals("left")) addCommands(new DriveTankCommand(tank, 0, -Float.parseFloat(parts[2])));
-                        else if (parts[1].equals("right")) addCommands(new DriveTankCommand(tank, 0, Float.parseFloat(parts[2])));
+                        addCommands(new DriveTankCommand(tank, 0, value));
                         break;
                     case "drive":
-                        //check if driving by distance or by time
-                        if (parts[1].equals("forward")) addCommands(new DriveTankCommand(tank, Float.parseFloat(parts[2]), 0));
-                        else if (parts[1].equals("backward")) addCommands(new DriveTankCommand(tank, -Float.parseFloat(parts[2]), 0));
+                        //set seconds/meters positive or negative according to direction
+                        if (parts[1].equals("forward")) value = Float.parseFloat(parts[2]);
+                        else if (parts[1].equals("backward")) value = -Float.parseFloat(parts[2]);
+                        //add drive command (either time mode or distance mode)
+                        if (parts[3].equals("seconds")) addCommands(new DriveTankCommand(tank, 1, value));
+                        else if (parts[3].equals("meters")) addCommands(new DriveTankCommand(tank, 2, value));
                         break;
                     case "intake":
-                        addCommands(new GuzzlerIntakeCommand(guzzler))
+                        //add guzzler intake command
+                        addCommands(new GuzzlerIntakeCommand(guzzler));
                         break;
                 }
             });

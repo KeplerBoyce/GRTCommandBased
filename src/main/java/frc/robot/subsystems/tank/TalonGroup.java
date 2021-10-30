@@ -25,6 +25,10 @@ public class TalonGroup {
         this.inverted = inverted;
     }
 
+    public int getQuadraturePos() {
+        return motors[0].getSensorCollection().getQuadraturePosition();
+    }
+
     public void set(ControlMode mode, double demand) {
         for (TalonSRX motor : motors) {
             if (inverted) {

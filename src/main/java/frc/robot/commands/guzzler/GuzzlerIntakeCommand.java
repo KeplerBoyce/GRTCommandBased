@@ -20,6 +20,8 @@ public class GuzzlerIntakeCommand extends CommandBase {
     @Override
     public void initialize() {
         guzzler.intakeBlock();
+        int num = guzzler.getNumBlocks();
+        System.out.println("taking block in; " + num + " blocks in storage");
     }
 
     @Override

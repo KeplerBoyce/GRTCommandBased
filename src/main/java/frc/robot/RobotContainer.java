@@ -21,6 +21,7 @@ import frc.robot.commands.TextCommandGroup;
 import frc.robot.commands.elevator.ElevatorDownCommand;
 import frc.robot.commands.elevator.ElevatorStopCommand;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.guzzler.GuzzlerSubsystem;
 import frc.robot.subsystems.tank.TankSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -38,6 +39,7 @@ public class RobotContainer {
   // Subsystems
   private final TankSubsystem tankSubsystem;
   private final ElevatorSubsystem elevatorSubsystem;
+  private final GuzzlerSubsystem guzzlerSubsystem;
 
   // Controllers
   private XboxController controlXbox = new XboxController(0);
@@ -75,8 +77,10 @@ public class RobotContainer {
     elevatorSubsystem = new ElevatorSubsystem(Integer.parseInt(config.getProperty("elevator_master")),
     Integer.parseInt(config.getProperty("elevator_follower")));
 
+    guzzlerSubsystem = new GuzzlerSubsystem();
+
     // Instantiate commands
-    textCommandGroup = new TextCommandGroup(tankSubsystem);
+    textCommandGroup = new TextCommandGroup(tankSubsystem, guzzlerSubsystem);
 
     // Configure the button bindings
     configureButtonBindings();
